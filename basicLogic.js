@@ -13,8 +13,8 @@ ball.style.left = `${tableDeck.offsetWidth / 2 - ball.offsetWidth / 2}px`;
 ball.style.top = `${tableDeck.offsetHeight / 2 - ball.offsetHeight / 2}px`;
 // Set the initial speed of the ball
 let ballSpeed = {
-  x: 5,
-  y: 5
+  x: 3,
+  y: 3
 };
 // Add event listeners for the keydown events of player1 and player2
 document.addEventListener("keydown", (key) => {
@@ -26,6 +26,7 @@ document.addEventListener("keydown", (key) => {
 
 // Function to handle key press events for player1
 function handleKeyPressPlayer1(key, player, tableDeck) {
+  if (currentPlayer !== 1) return;
   // Check the code of the key that was pressed
   switch (key.code) {
     case "ArrowUp":
@@ -43,6 +44,8 @@ function handleKeyPressPlayer1(key, player, tableDeck) {
 
 // Function to handle key press events for player2
 function handleKeyPressPlayer2(key, player, tableDeck) {
+  //this will check for 
+  if (currentPlayer !== 2) return;
   // Check the code of the key that was pressed
   switch (key.code) {
     case "KeyW":
@@ -61,22 +64,15 @@ function handleKeyPressPlayer2(key, player, tableDeck) {
 async function gameLoop() {
   //add functionality to handle each player turns 
   async function handlePlayerTurn() {
+    updateScoreboard();
     // Check if the ball has touched the other player
     if (currentPlayer === 1 && ball.offsetLeft <= player1.offsetLeft + player1.offsetWidth) {
       // Set current player to player 2
-      currentPlayer = 1;
-      player2Score++;
-      if (player2Score >= 10) {
-      alert("Player 2 wins!");
-      return};
-      
+      currentPlayer = 1;  
     } else if (currentPlayer === 2 && ball.offsetLeft + ball.offsetWidth >= player2.offsetLeft) {
       // Set current player to player 1
       currentPlayer = 2;
-      player1Score++;
-      if (player2Score >= 10) {
-        alert("Player 2 wins!");
-        return};
+      
     }
   
     // Wait for the current player to touch the ball
@@ -103,10 +99,22 @@ async function gameLoop() {
   }
 // Check if the ball goes past player1 or player2 and end the game
   if (ball.offsetLeft + ball.offsetWidth < 0) {
-    clearInterval(intervalId);
+    player1Score++;
+    updateScoreboard();
+    // Reset the position of the ball to the center of the table deck
+ball.style.left = `${tableDeck.offsetWidth / 2 - ball.offsetWidth / 2}px`;
+ball.style.top = `${tableDeck.offsetHeight / 2 - ball.offsetHeight / 2}px`;
+// Reset the current player to player 1
+currentPlayer = 1;
   }
   if (ball.offsetLeft > tableDeck.offsetWidth) {
-    clearInterval(intervalId);
+    player2Score++;
+    updateScoreboard();
+// Reset the position of the ball to the center of the table deck
+ball.style.left = `${tableDeck.offsetWidth / 2 - ball.offsetWidth / 2}px`;
+ball.style.top = `${tableDeck.offsetHeight / 2 - ball.offsetHeight / 2}px`;
+// Reset the current player to player 1
+currentPlayer = 2;
   }
 /*By wrapping this method in a Promise and awaiting it, the JavaScript execution is blocked until the next render cycle has completed. 
 This is often used to ensure that a change to the DOM (such as a layout or style change) has completed before further JavaScript logic is executed.*/
@@ -114,6 +122,6 @@ This is often used to ensure that a change to the DOM (such as a layout or style
 
 }
 // Start the game loop
-
+const intervalId = setInterval(gameLoop)
 //references to documentation used to write this code: 
-    
+

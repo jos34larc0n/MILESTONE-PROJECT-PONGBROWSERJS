@@ -1,5 +1,5 @@
-*{
-    background-image: url(./assets/brazil-croatia-berlin-june-13-2006-2-1442377\(1\).jpg);
+html{
+    background-image: url(./assets/brazil-croatia-berlin-june-13-2006-2-1442377\(1\).jpg); /*Free Asset Available in FreeImages.com Img reference: https://www.freeimages.com/photo/brazil-croatia-berlin-june-13-2006-2-1442377*/
     background-size: cover;
 }
 #deck {
@@ -8,7 +8,7 @@
     z-index: 1;
     height: 500px;
     width: 500px;
-    background-image: url(./assets/soccer-field-1147736.jpg);
+    background-image: url(./assets/soccer-field-1147736.jpg);   /*Free Asset Available in FreeImages.com Img reference: https://www.freeimages.com/photo/soccer-field-1147736*/
     background-size: 500px 500px;
   }
   
@@ -61,7 +61,7 @@
     background-color: blue;
     color: black;
     padding: 10px 20px;
-    border: none;
+    border: solid 2px black;
     border-radius: 5px;
     font-size: 18px;
     cursor: pointer;
@@ -82,7 +82,7 @@
     }
     
     #game-over-section{
-    color: white;
+    color: black 2px;
     font-size: 36px;
     margin-bottom: 20px;
     }
@@ -92,4 +92,14 @@
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    }
+
+    .powerboost-ball{
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background-color: unset;
+        z-index: 1;
+        border: solid black 1.5px;
+        border-radius: 50%;
     }

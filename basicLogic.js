@@ -3,6 +3,8 @@ const tableDeck = document.getElementById("deck");
 const player1 = document.getElementById("player1");
 const player2 = document.getElementById("player2");
 const ball = document.getElementById("ball");
+//Declare current player global variable to create a function that handles each turn
+let currentPlayer = 1;
 // Set the initial position of player1 and player2 to the center of the table deck
 player1.style.top = `${tableDeck.offsetHeight / 2 - player1.offsetHeight / 2}px`;
 player2.style.top = `${tableDeck.offsetHeight / 2 - player2.offsetHeight / 2}px`;
@@ -29,12 +31,12 @@ function handleKeyPressPlayer1(key, player, tableDeck) {
     case "ArrowUp":
       // If the up arrow key is pressed, move player1 up by 5 pixels
       // The position of the player1 is calculated by taking the maximum between 0 and the current top position minus 5 pixels
-      player.style.top = Math.max(0, player.offsetTop - 5) + "px";
+      player.style.top = Math.max(0, player.offsetTop - 25) + "px";
       break;
     case "ArrowDown":
       // If the down arrow key is pressed, move player1 down by 5 pixels
       // The position of the player1 is calculated by taking the minimum between the table deck height minus player height and the current top position plus 5 pixels
-      player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 5) + "px";
+      player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 25) + "px";
       break;
   }
 }
@@ -46,17 +48,33 @@ function handleKeyPressPlayer2(key, player, tableDeck) {
     case "KeyW":
       // If the 'W' key is pressed, move player2 up by 5 pixels
       // The position of the player2 is calculated by taking the maximum between 0 and the current top position minus 5 pixels
-      player.style.top = Math.max(0, player.offsetTop - 5) + "px";
+      player.style.top = Math.max(0, player.offsetTop - 25) + "px";
       break;
     case "KeyS":
       // If the 'S' key is pressed, move player2 down by 5 pixels
       // The position of the player2 is calculated by taking the minimum between the table deck height minus player height and the current top position plus 5 pixels
-      player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 5) + "px";
+      player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 25) + "px";
       break;
   }
 }
 // Game loop function that updates the position of the ball and checks for collisions with the players and table deck
 async function gameLoop() {
+  //add functionality to handle each player turns 
+  async function handlePlayerTurn() {
+    // Check if the ball has touched the other player
+    if (currentPlayer === 1 && ball.offsetLeft <= player1.offsetLeft + player1.offsetWidth) {
+      // Set current player to player 2
+      currentPlayer = 1;
+    } else if (currentPlayer === 2 && ball.offsetLeft + ball.offsetWidth >= player2.offsetLeft) {
+      // Set current player to player 1
+      currentPlayer = 2;
+    }
+  
+    // Wait for the current player to touch the ball
+    while (currentPlayer === 1 && ball.offsetLeft > player1.offsetLeft + player1.offsetWidth || currentPlayer === 2 && ball.offsetLeft + ball.offsetWidth < player2.offsetLeft) {
+      await new Promise(resolve => setTimeout(resolve, 10));
+    }
+  }
   // Update the position of the ball
   ball.style.left = `${ball.offsetLeft + ballSpeed.x}px`;
   ball.style.top = `${ball.offsetTop + ballSpeed.y}px`;
@@ -67,10 +85,12 @@ async function gameLoop() {
 // Check if the ball hits player1 and reverse the x-direction of the ball speed
   if (ball.offsetLeft <= player1.offsetLeft + player1.offsetWidth && ball.offsetTop + ball.offsetHeight >= player1.offsetTop && ball.offsetTop <= player1.offsetTop + player1.offsetHeight) {
     ballSpeed.x = -ballSpeed.x;
+    handlePlayerTurn(1);
   }
   // Check if the ball hits player1 and reverse the x-direction of the ball speed
   if (ball.offsetLeft + ball.offsetWidth >= player2.offsetLeft && ball.offsetTop + ball.offsetHeight >= player2.offsetTop && ball.offsetTop <= player2.offsetTop + player2.offsetHeight) {
     ballSpeed.x = -ballSpeed.x;
+    handlePlayerTurn(2);
   }
 // Check if the ball goes past player1 or player2 and end the game
   if (ball.offsetLeft + ball.offsetWidth < 0) {

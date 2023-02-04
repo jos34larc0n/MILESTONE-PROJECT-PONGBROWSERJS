@@ -15,29 +15,46 @@ let ballSpeed = {
   y: 5
 };
 // Add event listeners for the keydown events of player1 and player2
-// Player1 will move up and down with the arrow keys
-document.addEventListener("keydown", event => {
-  switch (event.code) {
-  case "ArrowUp":
-  player1.style.top = $;{Math.max(0, player1.offsetTop - 5)}px;
-  break;
-  case "ArrowDown":
-  player1.style.top = $;{Math.min(tableDeck.offsetHeight - player1.offsetHeight, player1.offsetTop + 5)}px;
-  break;
+document.addEventListener("keydown", (key) => {
+  // Call handleKeyPressPlayer1 function for player1 when the keydown event is triggered
+  handleKeyPressPlayer1(key, player1, tableDeck);
+  // Call handleKeyPressPlayer2 function for player2 when the keydown event is triggered
+  handleKeyPressPlayer2(key, player2, tableDeck);
+});
+
+// Function to handle key press events for player1
+function handleKeyPressPlayer1(key, player, tableDeck) {
+  // Check the code of the key that was pressed
+  switch (key.code) {
+    case "ArrowUp":
+      // If the up arrow key is pressed, move player1 up by 5 pixels
+      // The position of the player1 is calculated by taking the maximum between 0 and the current top position minus 5 pixels
+      player.style.top = Math.max(0, player.offsetTop - 5) + "px";
+      break;
+    case "ArrowDown":
+      // If the down arrow key is pressed, move player1 down by 5 pixels
+      // The position of the player1 is calculated by taking the minimum between the table deck height minus player height and the current top position plus 5 pixels
+      player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 5) + "px";
+      break;
   }
-  });
-  // Player2 will move up and down with the 'W' and 'S' keys
-  document.addEventListener("keyup", event => {
-  switch (event.code) {
-  case "KeyW":
-  player2.style.top = $;{Math.max(0, player2.offsetTop - 5)}px;
-  break;
-  case "KeyS":
-  player2.style.top = $;{Math.min(tableDeck.offsetHeight - player2.offsetHeight, player2.offsetTop + 5)}px;
-  break;
+}
+
+// Function to handle key press events for player2
+function handleKeyPressPlayer2(key, player, tableDeck) {
+  // Check the code of the key that was pressed
+  switch (key.code) {
+    case "KeyW":
+      // If the 'W' key is pressed, move player2 up by 5 pixels
+      // The position of the player2 is calculated by taking the maximum between 0 and the current top position minus 5 pixels
+      player.style.top = Math.max(0, player.offsetTop - 5) + "px";
+      break;
+    case "KeyS":
+      // If the 'S' key is pressed, move player2 down by 5 pixels
+      // The position of the player2 is calculated by taking the minimum between the table deck height minus player height and the current top position plus 5 pixels
+      player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 5) + "px";
+      break;
   }
-  });
-  
+}
 // Game loop function that updates the position of the ball and checks for collisions with the players and table deck
 async function gameLoop() {
   // Update the position of the ball

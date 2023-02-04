@@ -31,3 +31,18 @@ restartBtn.addEventListener("click", () => {
   updateScoreboard();
 });
 const intervalId = setInterval(gameLoop, endGame);
+  
+
+
+
+
+// Start game loop
+const startGameLoop = () => {
+    setInterval(() => {
+    updatePowerboostBalls();
+    checkForPowerboostBallInteraction();
+    }, 50);
+    };
+    
+    // Start game
+    initPowerboostBalls();

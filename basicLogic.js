@@ -110,9 +110,10 @@ async function gameLoop() {
   }
 /*By wrapping this method in a Promise and awaiting it, the JavaScript execution is blocked until the next render cycle has completed. 
 This is often used to ensure that a change to the DOM (such as a layout or style change) has completed before further JavaScript logic is executed.*/
-  await new Promise(resolve => requestAnimationFrame(resolve));
+  await new Promise(resolve => requestAnimationFrame(resolve));//
 
 }
 // Start the game loop
 
-
+//references to documentation used to write this code: 
+    

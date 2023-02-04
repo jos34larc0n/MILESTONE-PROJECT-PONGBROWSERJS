@@ -65,14 +65,23 @@ async function gameLoop() {
     if (currentPlayer === 1 && ball.offsetLeft <= player1.offsetLeft + player1.offsetWidth) {
       // Set current player to player 2
       currentPlayer = 1;
+      player2Score++;
+      if (player2Score >= 10) {
+      alert("Player 2 wins!");
+      return};
+      
     } else if (currentPlayer === 2 && ball.offsetLeft + ball.offsetWidth >= player2.offsetLeft) {
       // Set current player to player 1
       currentPlayer = 2;
+      player1Score++;
+      if (player2Score >= 10) {
+        alert("Player 2 wins!");
+        return};
     }
   
     // Wait for the current player to touch the ball
     while (currentPlayer === 1 && ball.offsetLeft > player1.offsetLeft + player1.offsetWidth || currentPlayer === 2 && ball.offsetLeft + ball.offsetWidth < player2.offsetLeft) {
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise(resolve => setTimeout(resolve, 15));
     }
   }
   // Update the position of the ball
@@ -94,16 +103,16 @@ async function gameLoop() {
   }
 // Check if the ball goes past player1 or player2 and end the game
   if (ball.offsetLeft + ball.offsetWidth < 0) {
-    alert("Player 2 wins!");
     clearInterval(intervalId);
   }
   if (ball.offsetLeft > tableDeck.offsetWidth) {
-    alert("Player 1 wins!");
     clearInterval(intervalId);
   }
 /*By wrapping this method in a Promise and awaiting it, the JavaScript execution is blocked until the next render cycle has completed. 
 This is often used to ensure that a change to the DOM (such as a layout or style change) has completed before further JavaScript logic is executed.*/
   await new Promise(resolve => requestAnimationFrame(resolve));
+
 }
 // Start the game loop
-const intervalId = setInterval(gameLoop, 50);
+
+

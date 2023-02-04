@@ -38,3 +38,52 @@
     border: solid black 1px;
 
   }
+
+  #scoreboard-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    }
+    
+    #scoreboard {
+    font-size: 24px;
+    font-weight: bold;
+    }
+    
+    #restart-btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    }
+    
+    #game-over {
+    display: unset;/*this is really impportant that way we can change it at the end of the game*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: unset;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    }
+    
+    #game-over-section{
+    color: white;
+    font-size: 36px;
+    margin-bottom: 20px;
+    }
+    
+    #winner {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    }

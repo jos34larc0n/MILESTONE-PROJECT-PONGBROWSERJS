@@ -1,21 +1,32 @@
-#pong {
+
+#deck {
+    position: fixed;
     border: 1px solid black;
+    z-index: 1;
+    height: 500px;
+    width: 500px;
+
   }
   
   #player1 {
     position: absolute;
-    left: 10px;
+    left: 0;
     width: 10px;
     height: 50px;
     background-color: blue;
+    z-index: 1;
+    border: solid black 1px;
+
   }
   
   #player2 {
     position: absolute;
-    right: 10px;
+    right: 0;
     width: 10px;
     height: 50px;
     background-color: red;
+    z-index: 1;
+    border: solid black 1px;
   }
   
   #ball {
@@ -23,4 +34,7 @@
     width: 10px;
     height: 10px;
     background-color: green;
+    z-index: 1;
+    border: solid black 1px;
+
   }

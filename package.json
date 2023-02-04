@@ -1,0 +1,19 @@
+{
+  "name": "milestone-project-pongbrowserjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "basicLogic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jos34larc0n/MILESTONE-PROJECT-PONGJPROBWSERS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jos34larc0n/MILESTONE-PROJECT-PONGJPROBWSERS/issues"
+  },
+  "homepage": "https://github.com/jos34larc0n/MILESTONE-PROJECT-PONGJPROBWSERS#readme"
+}

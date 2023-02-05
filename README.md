@@ -1,7 +1,7 @@
 # MILESTONE-PROJECT-PONGBROWSERJS  
 Soccer Pong
 
-A twist on the classic pong game with a soccer twist and free background images from the last world cup.
+A twist on the classic pong game with a soccer hint and some free images references from the last world cup.
 Inspiration
 
 The inspiration for this game came from my struggle with my first project proposal. I wanted to put a unique twist on the classic pong game by incorporating elements from the sport of soccer.

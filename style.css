@@ -20,6 +20,7 @@ html{
     background-color: blue;
     z-index: 1;
     border: solid black 2px;
+    border-radius: 25%;
 
   }
   
@@ -31,6 +32,7 @@ html{
     background-color: red;
     z-index: 1;
     border: solid black 2px;
+    border-radius: 25%;
   }
   
   #ball {

@@ -15,8 +15,8 @@ ball.style.left = `${tableDeck.offsetWidth / 2 - ball.offsetWidth / 2}px`;
 ball.style.top = `${tableDeck.offsetHeight / 2 - ball.offsetHeight / 2}px`;
 // Set the initial speed of the ball
 let ballSpeed = {
-  x: 1,
-  y: 1
+  x: 0.75,
+  y: 0.75
 };
 
 // Add event listeners for the keydown and keyup events of player1 and player2
@@ -24,12 +24,12 @@ let player1Interval;
 let player2Interval;
 //refactor key event listeners to allow both plays to move simoultaneously while holding the pressed key
 document.addEventListener("keydown", (key) => {
-if (key.code === "ArrowUp" || key.code === "ArrowDown") {
+if (key.code === "KeyW" || key.code === "KeyS") {
 if (!player1Moving) {
 handleKeyPressPlayer1(key, player1, tableDeck, true);
 player1Moving = true;
 }
-} else if (key.code === "KeyW" || key.code === "KeyS") {
+} else if (key.code === "ArrowUp" || key.code === "ArrowDown") {
 if (!player2Moving) {
 handleKeyPressPlayer2(key, player2, tableDeck, true);
 player2Moving = true;
@@ -38,10 +38,10 @@ player2Moving = true;
 });
 //add a key up listener to switch player dynamic
 document.addEventListener("keyup", (key) => {
-if (key.code === "ArrowUp" || key.code === "ArrowDown") {
+if (key.code === "KeyW" || key.code === "KeyS") {
 handleKeyPressPlayer1(key, player1, tableDeck, false);
 player1Moving = false;
-} else if (key.code === "KeyW" || key.code === "KeyS") {
+} else if (key.code === "ArrowUp" || key.code === "ArrowDown") {
 handleKeyPressPlayer2(key, player2, tableDeck, false);
 player2Moving = false;
 }
@@ -50,7 +50,7 @@ player2Moving = false;
 // Function to handle key press events for player1
 function handleKeyPressPlayer1(key, player, tableDeck, moving) {
 switch (key.code) {
-case "ArrowUp":
+case "KeyW":
 if (moving) {
 player1Interval = setInterval(() => {
 player.style.top = Math.max(0, player.offsetTop - 25) + "px";
@@ -59,10 +59,10 @@ player.style.top = Math.max(0, player.offsetTop - 25) + "px";
 clearInterval(player1Interval);
 }
 break;
-case "ArrowDown":
+case "KeyS":
 if (moving) {
 player1Interval = setInterval(() => {
-player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 25) + "px";
+player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 30) + "px";
 }, 100);
 } else {
 clearInterval(player1Interval);
@@ -73,20 +73,20 @@ break;
 
 // Function to handle key press events for player2
 function handleKeyPressPlayer2(key, player, tableDeck, moving) {
-switch (key.code) {
-case "KeyW":
-if (moving) {
+  switch (key.code) {
+    case "ArrowUp":
+    if (moving) {
 player2Interval = setInterval(() => {
-player.style.top = Math.max(0, player.offsetTop - 25) + "px";
+player.style.top = Math.max(0, player.offsetTop - 30) + "px";
 }, 100);
 } else {
 clearInterval(player2Interval);
 }
 break;
-  case "KeyS":
+  case "ArrowDown":
     if (moving) {
     player2Interval = setInterval(() => {
-    player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 25) + "px";
+    player.style.top = Math.min(tableDeck.offsetHeight - player.offsetHeight, player.offsetTop + 30) + "px";
     }, 100);
     } else {
     clearInterval(player2Interval);
@@ -148,4 +148,10 @@ while (currentPlayer === 1 && ball.offsetLeft > player1.offsetLeft + player1.off
 }
 // Start the game loop
 const intervalId = setInterval(gameLoop)
-//references to documentation used to write this code: 
+//references to some documentation used to write this code: 
+/*1-https://www.w3schools.com/jsref/met_win_setinterval.asp
+ 2-https://www.w3schools.com/jsref/jsref_max.asp
+ 3-https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
+ 4-https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearInterval
+ 5-https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+ 6-https://www.w3schools.com/jsref/prop_element_offsetheight.asp*/

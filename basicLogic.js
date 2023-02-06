@@ -151,7 +151,10 @@ const intervalId = setInterval(gameLoop)
 //references to some documentation used to write this code: 
 /*1-https://www.w3schools.com/jsref/met_win_setinterval.asp
  2-https://www.w3schools.com/jsref/jsref_max.asp
+ 2- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs
  3-https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code
  4-https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/clearInterval
  5-https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
- 6-https://www.w3schools.com/jsref/prop_element_offsetheight.asp*/
+ 6-https://www.w3schools.com/jsref/prop_element_offsetheight.asp
+ 7-//https://stackoverflow.com/questions/54256104/how-to-make-ball-bounce-off-triangle-in-pygame
+ */

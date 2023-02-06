@@ -1,5 +1,5 @@
 // store all the powerboost balls created in the game.
-const powerboostBalls = [];
+let powerboostBalls = [];
 
 //store the different types of powerboost balls that can be created.
 const powerboostBallTypes = [
@@ -41,17 +41,17 @@ const createPowerboostBall = () => {
     case "shrink":
         powerboostBall.style.backgroundColor = "rgb(255, 0, 0)";
         powerboostBall.innerHTML = type.charAt(0); 
-     player.style.height = `${player.offsetHeight / 2}px`;
-      setTimeout(() => {
-        player.style.height = `${player.offsetHeight * 2}px`;
+        player.style.height = `${ball.offsetHeight / 2}px`;
+        setTimeout(() => {
+        player.style.height = `${ball.offsetHeight * 2}px`;
       }, 5000);
       break;
     case "mirror":
         powerboostBall.style.backgroundColor = "rgb(0, 255, 0)";
         powerboostBall.innerHTML = type.charAt(0);
-        player.style.transform = "scaleY(-1)";
+        player.style.transform = "rotate(180deg)";
         setTimeout(() => {
-        player.style.transform = "scaleY(1)";
+        player.style.transform = "rotate(180deg)";
       }, 5000);
       break;
     case "Speed up":
@@ -63,26 +63,27 @@ const createPowerboostBall = () => {
         }, 5000);
       break;
   }}
-    
-  // Loop through all the powerboost balls in the powerboostBalls array and check for any collision with the player.
-
   const checkPowerboostBallCollision = (ball) => {
     powerboostBalls.forEach((powerboostBall) => {
-    const ballRect = ball.getBoundingClientRect();
-    const powerboostBallRect = powerboostBall.getBoundingClientRect();
-    
-    if (ballRect.left < powerboostBallRect.right &&
-        ballRect.right > powerboostBallRect.left &&
-        ballRect.top < powerboostBallRect.bottom &&
-        ballRect.bottom > powerboostBallRect.top) {
-      handlePowerboostBallEffects(ball.lastTouchedBy, powerboostBall);
-      powerboostBall.remove();
-      powerboostBalls.splice(powerboostBalls.indexOf(powerboostBall), 1);
-    }
-    
+      const ballRect = ball.getBoundingClientRect();
+      const powerboostBallRect = powerboostBall.getBoundingClientRect();
+  
+      // Check if the ball is within 5px of the boundary of the powerboost ball
+      if (
+        (ballRect.right >= powerboostBallRect.left - 5 && ballRect.right <= powerboostBallRect.left) ||
+        (ballRect.left <= powerboostBallRect.right + 5 && ballRect.left >= powerboostBallRect.right) ||
+        (ballRect.bottom >= powerboostBallRect.top - 5 && ballRect.bottom <= powerboostBallRect.top) ||
+        (ballRect.top <= powerboostBallRect.bottom + 5 && ballRect.top >= powerboostBallRect.bottom)
+      ) {
+        // Call the function to handle the effects of the powerboost ball
+        handlePowerboostBallEffects(ball.lastTouchedBy, powerboostBall);
+  
+        // Remove the powerboost ball from the game
+        powerboostBall.hidden = true;
+        powerboostBalls.splice(powerboostBalls.indexOf(powerboostBall), 1);
+      }
     });
-    
-    };
+  };
 
     // Function to generate a random powerboost ball every 5 seconds and render on screen
 
@@ -99,8 +100,8 @@ const createPowerboostBall = () => {
        
           // Generate random values for the x and y direction of the powerboost ball's movement.
        
-          const xDirection = Math.floor(Math.random() * 2) == 0 ? -1 : 1;
-        const yDirection = Math.floor(Math.random() * 2) == 0 ? -1 : 1;
+          let xDirection = Math.floor(Math.random() * 2) == 0 ? -1 : 1;
+          let yDirection = Math.floor(Math.random() * 2) == 0 ? -1 : 1;
        
         // Calculate the new left and top position of the powerboost ball by adding the current position and the x and y direction values.
        
@@ -129,3 +130,6 @@ setInterval(() => {
 movePowerboostBalls();
 }, 500);
             
+
+
+

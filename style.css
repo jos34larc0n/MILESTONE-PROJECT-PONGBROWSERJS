@@ -112,11 +112,49 @@ html{
     }
 
     .powerboost-ball{
-        position: absolute;
+        position: relative;
         width: 15px;
         height: 15px;
-        background-color: unset;
         z-index: 1;
-        border: solid black 1.5px;
+        border: solid black 2px;
         border-radius: 50%;
     }
+
+    
+/* with this media frames well try preserve the website layout make it responsive for different screens size*/
+
+@media (max-width: 767px) {
+  #deck {
+    height: 300px;
+    width: 300px;
+    background-size: 300px 300px;
+  }
+  #scoreboard {
+    transform: translateX(0);
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #deck {
+    height: 400px;
+    width: 400px;
+    background-size: 400px 400px;
+  }
+  #scoreboard {
+    transform: translateX(400px);
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  #deck {
+    height: 500px;
+    width: 500px;
+    background-size: 500px 500px;
+  }
+  #scoreboard {
+    transform: translateX(600px);
+    font-size: 24px;
+  }
+}
